@@ -1,0 +1,14 @@
+{
+  "name": "hello-node",
+  "version": "1.0.0",
+  "description": "A Kubernetes test app",
+  "main": "index.js",
+  "author": "Paul Roper",
+  "license": "MIT",
+  "scripts": {
+    "build": "eval $(minikube docker-env) && docker build ."
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
