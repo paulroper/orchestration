@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $HELLO_NODE_SERVICE_NAME
+  labels:
+    app: $HELLO_NODE_SERVICE_NAME
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: $HELLO_NODE_SERVICE_NAME
+  template:
+    metadata:
+      labels:
+        app: $HELLO_NODE_SERVICE_NAME
+    spec:
+      containers:
+      - name: $HELLO_NODE_SERVICE_NAME
+        image: $HELLO_NODE_SERVICE_NAME:$HELLO_NODE_VERSION
+        ports:
+        - containerPort: $HELLO_NODE_PORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $HELLO_NODE_SERVICE_NAME
+  labels:
+    app: $HELLO_NODE_SERVICE_NAME
+spec:
+  type: LoadBalancer
+  selector:
+    app: $HELLO_NODE_SERVICE_NAME
+  ports:
+    - name: $HELLO_NODE_SERVICE_NAME
+      port: $HELLO_NODE_PORT
+      targetPort: $HELLO_NODE_PORT

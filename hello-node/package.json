@@ -6,7 +6,8 @@
   "author": "Paul Roper",
   "license": "MIT",
   "scripts": {
-    "build": "eval $(minikube docker-env) && docker build ."
+    "build": "docker build .",
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.16.3"
