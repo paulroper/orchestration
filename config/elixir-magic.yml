@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $ELIXIR_MAGIC_SERVICE_NAME
+  labels:
+    app: $ELIXIR_MAGIC_SERVICE_NAME
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: $ELIXIR_MAGIC_SERVICE_NAME
+  template:
+    metadata:
+      labels:
+        app: $ELIXIR_MAGIC_SERVICE_NAME
+    spec:
+      containers:
+      - name: $ELIXIR_MAGIC_SERVICE_NAME
+        image: $ELIXIR_MAGIC_SERVICE_NAME:$ELIXIR_MAGIC_VERSION
+        ports:
+        - containerPort: $ELIXIR_MAGIC_PORT
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: http_proxy
+          value: $(NODE_NAME):4140
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $ELIXIR_MAGIC_SERVICE_NAME
+  labels:
+    app: $ELIXIR_MAGIC_SERVICE_NAME
+spec:
+  type: LoadBalancer
+  selector:
+    app: $ELIXIR_MAGIC_SERVICE_NAME
+  ports:
+    - name: $ELIXIR_MAGIC_SERVICE_NAME
+      port: $ELIXIR_MAGIC_PORT
+      targetPort: $ELIXIR_MAGIC_PORT
