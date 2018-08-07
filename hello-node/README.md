@@ -1,12 +1,12 @@
-## hello-node
+# hello-node
 
 A simple Node microservice.
 
-### Setup
+## Setup
 
 Run `yarn install` to grab the dependencies.
 
-### Scripts
+## Scripts
 
 * `yarn build`: Build the Docker container
 * `yarn start`: Start the service locally
