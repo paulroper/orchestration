@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $GO_HTTP_SERVICE_NAME
+  labels:
+    app: $GO_HTTP_SERVICE_NAME
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: $GO_HTTP_SERVICE_NAME
+  template:
+    metadata:
+      labels:
+        app: $GO_HTTP_SERVICE_NAME
+    spec:
+      containers:
+      - name: $GO_HTTP_SERVICE_NAME
+        image: $GO_HTTP_SERVICE_NAME:$GO_HTTP_VERSION
+        ports:
+        - containerPort: $GO_HTTP_PORT
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: http_proxy
+          value: $(NODE_NAME):4140
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $GO_HTTP_SERVICE_NAME
+  labels:
+    app: $GO_HTTP_SERVICE_NAME
+spec:
+  type: LoadBalancer
+  selector:
+    app: $GO_HTTP_SERVICE_NAME
+  ports:
+    - name: $GO_HTTP_SERVICE_NAME
+      port: $GO_HTTP_PORT
+      targetPort: $GO_HTTP_PORT
