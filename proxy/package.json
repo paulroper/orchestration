@@ -1,0 +1,16 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "A little proxy app to test Linkerd's magic",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker build .",
+    "start": "node index.js"
+  },
+  "author": "Paul Roper",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "node-fetch": "^2.2.0"
+  }
+}
