@@ -20,6 +20,12 @@ cd ./proxy && yarn build -t $PROXY_SERVICE_NAME:$PROXY_VERSION && cd ..
 kubetpl render ./config/proxy.yml -i ./.env -x $ | kubectl apply -f -
 
 # Install linkerd
-kubectl create ns linkerd 2> /dev/null || true
-kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/servicemesh.yml
+# kubectl create ns linkerd 2> /dev/null || true
+# kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/servicemesh.yml
+
+linkerd install | kubectl apply -f -
 kubectl apply -f ./config/servicemesh.yml
+
+kubectl get -n default deploy -o yaml \
+  | linkerd inject - \
+  | kubectl apply -f -
