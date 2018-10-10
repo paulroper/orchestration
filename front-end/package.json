@@ -6,7 +6,6 @@
   "author": "Paul Roper",
   "scripts": {
     "build": "docker build .",
-    "elm:make": "elm make",
     "start": "elm reactor"
   },
   "license": "ISC",
