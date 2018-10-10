@@ -8,7 +8,7 @@ app.get('/', async (req, res) => {
   console.log('Fetching from hello-node...');
 
   try {
-    const fetchRes = await fetch('http://hello-node:8080');
+    const fetchRes = await fetch('http://hello-node:8000');
     const jsonRes = await fetchRes.json();
 
     console.log(jsonRes);

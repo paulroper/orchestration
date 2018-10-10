@@ -18,8 +18,12 @@ spec:
       containers:
       - name: $HELLO_NODE_SERVICE_NAME
         image: $HELLO_NODE_SERVICE_NAME:$HELLO_NODE_VERSION
+        env:
+          - name: PORT
+            value: $HELLO_NODE_PORT
         ports:
         - containerPort: $HELLO_NODE_PORT
+
 ---
 apiVersion: v1
 kind: Service
