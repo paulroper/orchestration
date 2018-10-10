@@ -6,7 +6,7 @@ metadata:
   labels:
     app: $HELLO_NODE_SERVICE_NAME
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: $HELLO_NODE_SERVICE_NAME

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: $ELIXIR_MAGIC_SERVICE_NAME
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: $ELIXIR_MAGIC_SERVICE_NAME
