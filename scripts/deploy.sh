@@ -5,7 +5,6 @@ export $(cat .env | xargs)
 
 # Install linkerd
 linkerd install | kubectl apply -f -
-kubectl apply -f ./config/servicemesh.yml
 
 # elixir-magic build steps
 cd ./elixir-magic && docker build . -t $ELIXIR_MAGIC_SERVICE_NAME:$ELIXIR_MAGIC_VERSION && cd ..
