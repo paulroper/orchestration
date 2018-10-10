@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $FRONT_END_SERVICE_NAME
+  labels:
+    app: $FRONT_END_SERVICE_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $FRONT_END_SERVICE_NAME
+  template:
+    metadata:
+      labels:
+        app: $FRONT_END_SERVICE_NAME
+    spec:
+      containers:
+      - name: $FRONT_END_SERVICE_NAME
+        image: $FRONT_END_SERVICE_NAME:$FRONT_END_VERSION
+        ports:
+        - containerPort: $FRONT_END_PORT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $FRONT_END_SERVICE_NAME
+  labels:
+    app: $FRONT_END_SERVICE_NAME
+spec:
+  type: LoadBalancer
+  selector:
+    app: $FRONT_END_SERVICE_NAME
+  ports:
+    - name: $FRONT_END_SERVICE_NAME
+      port: $FRONT_END_PORT
+      targetPort: $FRONT_END_PORT
