@@ -3,6 +3,11 @@ const fetch = require('node-fetch');
 
 var app = express();
 
+app.all('/', (_, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.get('/', async (req, res) => {
   console.log();
   console.log('Fetching from hello-node...');
